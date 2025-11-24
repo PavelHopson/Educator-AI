@@ -123,7 +123,6 @@ You can run Questify locally in less than 2 minutes.
 
 ## 👨‍💻 Team
 
-**Artem "Hex" Voronin**
 *Staff Software Engineer | .NET & React Expert*
 
 > *"I don't just write code. I build digital assets that generate revenue."*
