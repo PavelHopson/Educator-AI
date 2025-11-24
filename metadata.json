@@ -1,0 +1,5 @@
+{
+  "name": "Valhalla Educator AI",
+  "description": "Enterprise-grade PDF to Game converter powered by Gemini 3 Pro. Converts boring manuals into interactive quizzes and escape rooms.",
+  "requestFramePermissions": []
+}
