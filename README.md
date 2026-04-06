@@ -1,134 +1,107 @@
-# 🗝️ Questify | Intelligent Gamification Platform
+# Educator AI / Questify
 
 ![Banner](https://img.shields.io/badge/QUESTIFY-AI_GAMIFICATION_ENGINE-6d28d9?style=for-the-badge&logo=google-gemini&logoColor=white)
 
 <div align="center">
 
-[![Status](https://img.shields.io/badge/Status-Production_Ready-success?style=flat-square)](https://questify.app)
-[![Tech](https://img.shields.io/badge/Stack-React_19_%7C_Gemini_3_Pro-purple?style=flat-square)](https://react.dev)
+[![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Vite-6-646cff?style=flat-square&logo=vite)](https://vite.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178c6?style=flat-square&logo=typescript)](https://www.typescriptlang.org)
+[![Gemini](https://img.shields.io/badge/Gemini_AI-Google-8e75b2?style=flat-square&logo=google-gemini)](https://ai.google.dev)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
-[![Design](https://img.shields.io/badge/Design_System-Tailwind_Quest_UI-pink?style=flat-square)](https://tailwindcss.com)
 
-**"Turn boring manuals into engaging escape rooms in 60 seconds."**
-
-[View Demo](https://questify.app) · [Report Bug](https://github.com/hex-dev/questify/issues) · [Request Feature](https://github.com/hex-dev/questify/issues)
+**Превращает PDF и учебные материалы в интерактивные квесты и escape rooms за 60 секунд.**
 
 </div>
 
 ---
 
-## 🚀 The Product
+## About
 
-**Questify** is an enterprise-grade SaaS platform designed to disrupt the Corporate L&D (Learning & Development) market. We leverage **Google Gemini 3 Pro's** multimodal capabilities to instantly transform static educational content (PDFs, Wikis, Manuals) into interactive, gamified experiences.
+**Questify** -- AI-платформа для геймификации обучения. Загрузите любой учебный текст, и Gemini AI мгновенно превратит его в интерактивный квиз или escape room с сюжетом, персонажами и головоломками.
 
-### 💎 Business Value Proposition
-*   **Time-to-Market:** Reduce course creation time from **2 weeks to 60 seconds**.
-*   **Engagement:** Increase employee completion rates by **up to 40%** via gamification mechanics.
-*   **Scalability:** Zero-backend architecture allows scaling to millions of users with minimal infrastructure costs.
+Проект задуман как инструмент для корпоративного обучения (L&D) и edtech: сокращает создание курса с недель до минуты.
 
 ---
 
-## ✨ Key Features
+## Features
 
-| Feature | Description | Tech Under the Hood |
-| :--- | :--- | :--- |
-| **🧠 AI Story Engine** | Automatically generates plot, characters, and dialogue from dry technical text. | `Gemini 3 Pro` + `Prompt Engineering` |
-| **🗝️ Escape Room Mode** | Creates non-linear text adventures with inventory systems and branching logic. | `Graph Theory` + `State Management` |
-| **📝 Adaptive Quizzes** | Generates questions that test *understanding*, not just memory, with instant feedback. | `JSON Schema Validation` |
-| **🎨 Quest Design System** | Premium, dark-mode-first UI that feels like a AAA game interface. | `Tailwind CSS` + `Glassmorphism` |
-| **🌍 Localization** | Native support for **English** and **Russian** markets. | `i18n` Architecture |
+| Фича | Описание |
+| :--- | :--- |
+| **Quiz Mode** | AI генерирует вопросы на понимание с мгновенной обратной связью |
+| **Escape Room Mode** | Нелинейные текстовые квесты с инвентарём и ветвлением сюжета |
+| **PDF Upload** | Загрузка учебных материалов напрямую |
+| **EN/RU Localization** | Полная поддержка английского и русского языков |
+| **Dark UI** | Премиальный интерфейс с glassmorphism и анимациями |
 
 ---
 
-## 🛠 Engineering & Architecture
+## Tech Stack
 
-This project is built with a **"Quality First"** mindset, following Clean Architecture principles adapted for a modern Frontend-First application.
+- **Core:** React 19, TypeScript 5.8
+- **Build:** Vite 6
+- **AI:** Google Gemini AI (`@google/genai`)
+- **Animation:** Framer Motion
+- **Styling:** Tailwind CSS (custom Quest palette)
 
-### Tech Stack
-*   **Core:** React 19 (RC), TypeScript 5.4
-*   **Build:** Vite (Super fast HMR)
-*   **AI Integration:** Google GenAI SDK (Vertex AI ready)
-*   **Styling:** Tailwind CSS with custom `Quest` color palette & animations
-*   **Architecture:** Feature-Sliced Design (Lite)
+---
 
-### Folder Structure (FSD)
-```bash
-src/
-├── app/                  # Entry point & Global providers
-├── features/             # Business logic (Auth, Billing)
-├── widgets/              # Complex UI blocks (GamePlayer, LandingPage)
-├── shared/               # Reusable code
-│   ├── lib/              # Core Logic (AI Client, Game Engine)
-│   └── ui/               # Dumb Components (Buttons, Inputs)
-└── index.tsx             # Root
+## Project Structure
+
+```
+.
+├── App.tsx                    # Главный компонент приложения
+├── index.tsx                  # Entry point
+├── types.ts                   # Re-export типов
+├── components/                # UI компоненты (Button, QuizPlayer, EscapeRoomPlayer)
+├── services/                  # Legacy сервисы (перенесены в shared/)
+├── shared/
+│   ├── lib/
+│   │   ├── ai/               # Gemini AI клиент и промпты
+│   │   └── game/             # Типы, движок игры, компоненты
+│   └── ui/                   # Переиспользуемые UI-компоненты (Button, Branding)
+└── widgets/
+    ├── GamePlayer/            # Виджет игрового процесса
+    └── Landing/               # Лендинг-страница
 ```
 
 ---
 
-## ⚡ Quick Start
-
-You can run Questify locally in less than 2 minutes.
+## Quick Start
 
 ### Prerequisites
-*   Node.js 18+
-*   Google Gemini API Key (Get it [here](https://aistudio.google.com/))
+
+- Node.js 18+
+- Google Gemini API Key ([получить здесь](https://aistudio.google.com/))
 
 ### Installation
 
-1.  **Clone the repository**
-    ```bash
-    git clone https://github.com/your-org/questify.git
-    cd questify
-    ```
+```bash
+git clone https://github.com/PavelHopson/Educator-AI.git
+cd Educator-AI
+npm install
+```
 
-2.  **Install dependencies**
-    ```bash
-    npm install
-    ```
+### Configuration
 
-3.  **Configure Environment**
-    Create a `.env` file in the root directory:
-    ```env
-    # Your Google Gemini API Key
-    API_KEY=AIzaSy...
-    ```
+Скопируйте `.env.example` и укажите свой API-ключ:
 
-4.  **Run Development Server**
-    ```bash
-    npm start
-    ```
+```bash
+cp .env.example .env
+```
 
----
+```env
+GEMINI_API_KEY=your_api_key_here
+```
 
-## 🗺️ Roadmap & Monetization
+### Run
 
-### Phase 1: MVP (Completed) ✅
-*   [x] Core AI Engine Integration
-*   [x] Quiz & Escape Room Modes
-*   [x] Premium Landing Page
-*   [x] Russian/English Localization
-
-### Phase 2: Growth (Q2 2025) 🚧
-*   [ ] **Stripe Integration** ($15/mo Pro Plan)
-*   [ ] **PDF Parsing** (Direct file upload via PDF.js)
-*   [ ] **User Auth** (Firebase / Supabase)
-*   [ ] **Export to SCORM** (For LMS integration)
-
-### Phase 3: Enterprise (Q4 2025) 🔮
-*   [ ] SSO (Single Sign-On)
-*   [ ] Custom Domain Support
-*   [ ] Analytics Dashboard (Employee Performance)
+```bash
+npm run dev
+```
 
 ---
 
-## 👨‍💻 Team
+## License
 
-*Staff Software Engineer | .NET & React Expert*
-
-> *"I don't just write code. I build digital assets that generate revenue."*
-
----
-
-<div align="center">
-  <sub>© 2025 Questify Inc. Built with ❤️ and Gemini 3 Pro.</sub>
-</div>
+[MIT](LICENSE) &copy; 2025 PavelHopson
