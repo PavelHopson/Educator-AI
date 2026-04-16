@@ -8,7 +8,7 @@ import { Logo } from './shared/ui/Branding';
 
 const TEXTS = {
   en: {
-    placeholder: `Paste your educational content here. 
+    placeholder: `Paste your educational content here.
 Example:
 "Photosynthesis is a chemical process that converts light energy into chemical energy..."`,
     title: 'Create a New Quest',
@@ -22,7 +22,7 @@ Example:
     errorLen: 'Please enter more text (min 50 chars) for AI to work.'
   },
   ru: {
-    placeholder: `Вставьте текст учебного материала сюда. 
+    placeholder: `Вставьте текст учебного материала сюда.
 Например:
 "Фотосинтез — сложный химический процесс преобразования энергии света в энергию химических связей..."`,
     title: 'Создать Новый Квест',
@@ -84,21 +84,21 @@ const App: React.FC = () => {
       case AppState.Config:
         return (
           <div className="max-w-4xl mx-auto animate-fade-in-up">
-            <div className="glass-panel rounded-2xl p-8 shadow-2xl">
+            <div className="quest-card rounded-2xl p-8 shadow-2xl">
               <div className="mb-10 text-center">
-                <h1 className="text-4xl font-display font-extrabold text-white mb-3">
+                <h1 className="text-4xl font-display font-extrabold text-white mb-3 text-glow-blue">
                   {t.title}
                 </h1>
-                <p className="text-quest-200 text-lg">{t.subtitle}</p>
+                <p className="text-quest-200 text-lg tracking-wide">{t.subtitle}</p>
               </div>
 
               {/* Step 1: Input */}
               <div className="mb-8">
-                <label className="block text-xs font-bold text-quest-300 mb-2 uppercase tracking-wide">
+                <label className="block text-[10px] font-bold text-quest-300 mb-2 uppercase tracking-[0.2em]">
                   {t.step1}
                 </label>
                 <textarea
-                  className="w-full h-48 bg-quest-950/50 border border-quest-500/30 rounded-xl p-4 text-slate-200 focus:ring-2 focus:ring-quest-500 focus:border-transparent transition-all resize-none font-mono text-sm leading-relaxed placeholder:text-slate-600"
+                  className="w-full h-48 bg-quest-950/50 border border-quest-700/30 rounded-xl p-4 text-slate-200 focus:ring-2 focus:ring-quest-500/50 focus:border-quest-500/30 transition-all resize-none font-mono text-sm leading-relaxed placeholder:text-slate-600"
                   placeholder={t.placeholder}
                   value={sourceText}
                   onChange={(e) => setSourceText(e.target.value)}
@@ -108,32 +108,32 @@ const App: React.FC = () => {
               {/* Step 2: Configuration */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
                 <div>
-                  <label className="block text-xs font-bold text-quest-300 mb-3 uppercase tracking-wide">{t.step2}</label>
+                  <label className="block text-[10px] font-bold text-quest-300 mb-3 uppercase tracking-[0.2em]">{t.step2}</label>
                   <div className="grid grid-cols-2 gap-3">
                     <button
                       onClick={() => setSelectedType(GameType.Quiz)}
-                      className={`p-4 rounded-xl border flex flex-col items-center gap-2 transition-all group ${selectedType === GameType.Quiz ? 'bg-quest-600 border-quest-500 text-white shadow-lg shadow-quest-500/20' : 'bg-quest-900/50 border-quest-800 text-slate-400 hover:bg-quest-800'}`}
+                      className={`quest-card p-4 rounded-xl flex flex-col items-center gap-2 transition-all group ${selectedType === GameType.Quiz ? 'bg-quest-500/15 border-quest-500/40 text-white shadow-lg shadow-quest-500/10' : 'text-slate-400 hover:bg-quest-800/30'}`}
                     >
                       <span className="text-3xl group-hover:scale-110 transition-transform">📝</span>
-                      <span className="font-semibold text-sm">Quiz</span>
+                      <span className="font-semibold text-sm tracking-wide">Quiz</span>
                     </button>
                     <button
                       onClick={() => setSelectedType(GameType.EscapeRoom)}
-                      className={`p-4 rounded-xl border flex flex-col items-center gap-2 transition-all group ${selectedType === GameType.EscapeRoom ? 'bg-quest-600 border-quest-500 text-white shadow-lg shadow-quest-500/20' : 'bg-quest-900/50 border-quest-800 text-slate-400 hover:bg-quest-800'}`}
+                      className={`quest-card p-4 rounded-xl flex flex-col items-center gap-2 transition-all group ${selectedType === GameType.EscapeRoom ? 'bg-quest-500/15 border-quest-500/40 text-white shadow-lg shadow-quest-500/10' : 'text-slate-400 hover:bg-quest-800/30'}`}
                     >
                       <span className="text-3xl group-hover:scale-110 transition-transform">🗝️</span>
-                      <span className="font-semibold text-sm">Escape Room</span>
+                      <span className="font-semibold text-sm tracking-wide">Escape Room</span>
                     </button>
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-quest-300 mb-3 uppercase tracking-wide">{t.step3}</label>
+                  <label className="block text-[10px] font-bold text-quest-300 mb-3 uppercase tracking-[0.2em]">{t.step3}</label>
                   <select
                     value={difficulty}
                     onChange={(e) => setDifficulty(e.target.value as Difficulty)}
-                    className="w-full bg-quest-900/50 border border-quest-800 rounded-xl px-4 py-4 text-white focus:ring-2 focus:ring-quest-500 outline-none appearance-none"
-                    style={{ backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23a78bfa%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '0.65em auto' }}
+                    className="w-full bg-quest-950/50 border border-quest-700/30 rounded-xl px-4 py-4 text-white focus:ring-2 focus:ring-quest-500/50 outline-none appearance-none"
+                    style={{ backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%236BA3FF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '0.65em auto' }}
                   >
                     <option value={Difficulty.Easy}>Easy / Легко</option>
                     <option value={Difficulty.Medium}>Medium / Нормально</option>
@@ -143,15 +143,15 @@ const App: React.FC = () => {
               </div>
 
               {error && (
-                <div className="mb-6 p-4 bg-red-900/20 border border-red-500/50 rounded-lg text-red-200 flex items-center gap-3 text-sm">
+                <div className="mb-6 p-4 bg-red-900/20 border border-red-500/30 rounded-xl text-red-200 flex items-center gap-3 text-sm">
                   <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                   <span>{error}</span>
                 </div>
               )}
 
-              <Button 
-                onClick={handleGenerate} 
-                className="w-full text-lg shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_30px_rgba(139,92,246,0.5)] py-4"
+              <Button
+                onClick={handleGenerate}
+                className="w-full text-lg py-4"
                 isLoading={isLoading}
               >
                 {t.btnGenerate}
@@ -163,13 +163,13 @@ const App: React.FC = () => {
       case AppState.Generating:
         return (
           <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
-            <div className="relative mb-8">
+            <div className="relative mb-8 spinner-glow">
                <div className="w-24 h-24 border-4 border-quest-500/20 rounded-full"></div>
                <div className="w-24 h-24 border-4 border-quest-400 border-t-transparent rounded-full animate-spin absolute top-0 left-0"></div>
                <div className="absolute inset-0 flex items-center justify-center text-3xl animate-pulse">✨</div>
             </div>
-            <h2 className="text-3xl font-display font-bold text-white mb-3 text-glow">{t.generatingTitle}</h2>
-            <p className="text-quest-200 max-w-md animate-pulse">
+            <h2 className="text-3xl font-display font-bold text-white mb-3 text-glow-blue">{t.generatingTitle}</h2>
+            <p className="text-quest-200 max-w-md animate-pulse tracking-wide">
               {t.generatingDesc}
             </p>
           </div>
@@ -184,34 +184,34 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-quest-900 text-slate-100 selection:bg-quest-500 selection:text-white font-sans bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]">
+    <div className="grain min-h-screen bg-quest-950 text-slate-100 selection:bg-quest-500/25 selection:text-white font-sans cyber-grid">
       {/* App Header */}
-      <header className="border-b border-quest-800 bg-quest-950/80 backdrop-blur-md sticky top-0 z-50">
+      <header className="glass-panel border-b border-quest-700/20 backdrop-blur-xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2 cursor-pointer group" onClick={() => setAppState(AppState.Config)}>
-            <Logo size={28} className="group-hover:drop-shadow-[0_0_10px_rgba(167,139,250,0.5)] transition-all" />
-            <span className="font-display font-bold text-xl tracking-tight">Questify</span>
+            <Logo size={28} className="group-hover:drop-shadow-[0_0_10px_rgba(107,163,255,0.5)] transition-all" />
+            <span className="font-display font-bold text-xl tracking-tight text-glow-blue">Questify</span>
           </div>
-          
+
           <div className="flex items-center gap-4">
              {/* Language Switcher Mini */}
-             <div className="hidden sm:flex bg-slate-800 rounded-lg p-1 border border-slate-700 mr-2">
-                <button onClick={() => setLanguage('en')} className={`px-2 py-0.5 rounded text-[10px] font-bold ${language === 'en' ? 'bg-quest-600 text-white' : 'text-slate-400'}`}>EN</button>
-                <button onClick={() => setLanguage('ru')} className={`px-2 py-0.5 rounded text-[10px] font-bold ${language === 'ru' ? 'bg-quest-600 text-white' : 'text-slate-400'}`}>RU</button>
+             <div className="hidden sm:flex bg-quest-950/80 rounded-lg p-1 border border-quest-700/30 mr-2">
+                <button onClick={() => setLanguage('en')} className={`px-2 py-0.5 rounded text-[10px] font-bold tracking-wider ${language === 'en' ? 'bg-quest-500/20 text-quest-300' : 'text-slate-500'}`}>EN</button>
+                <button onClick={() => setLanguage('ru')} className={`px-2 py-0.5 rounded text-[10px] font-bold tracking-wider ${language === 'ru' ? 'bg-quest-500/20 text-quest-300' : 'text-slate-500'}`}>RU</button>
              </div>
 
              {process.env.API_KEY ? (
                 <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-900/20 border border-emerald-500/20">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_rgba(52,211,153,0.5)]"></span>
-                  <span className="text-xs font-medium text-emerald-400">Gemini Pro</span>
+                  <span className="text-[10px] font-medium text-emerald-400 tracking-wider uppercase">Gemini Pro</span>
                 </div>
              ) : (
-               <span className="text-xs bg-red-900/30 text-red-400 px-3 py-1.5 rounded-full border border-red-500/20 font-medium">
+               <span className="text-[10px] bg-red-900/20 text-red-400 px-3 py-1.5 rounded-full border border-red-500/20 font-medium tracking-wider uppercase">
                  API Key Missing
                </span>
              )}
-             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-quest-400 to-pink-400 p-[1px]">
-                <div className="w-full h-full rounded-full bg-quest-900 flex items-center justify-center text-xs font-bold">HEX</div>
+             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-quest-400 to-amber-400 p-[1px]">
+                <div className="w-full h-full rounded-full bg-quest-950 flex items-center justify-center text-[10px] font-bold tracking-wider">HEX</div>
              </div>
           </div>
         </div>

@@ -18,12 +18,157 @@ body {
 ::-webkit-scrollbar-thumb { background: #1C2536; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: #6BA3FF; }
 
-.glass-panel {
-  background: rgba(12, 17, 23, 0.7);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(107, 163, 255, 0.15);
+/* ── Grain texture overlay ── */
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 50;
+  mix-blend-mode: soft-light;
 }
 
+/* ── Cyber grid background ── */
+.cyber-grid {
+  background-image:
+    linear-gradient(to right, rgba(107, 163, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(107, 163, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Glass panel (upgraded) ── */
+.glass-panel {
+  background: rgba(12, 17, 23, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(107, 163, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Quest card with neon corner brackets ── */
+.quest-card {
+  position: relative;
+  background: rgba(12, 17, 23, 0.85);
+  border: 1px solid rgba(107, 163, 255, 0.1);
+  backdrop-filter: blur(8px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.quest-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 12px; height: 12px;
+  border-top: 2px solid #6BA3FF;
+  border-left: 2px solid #6BA3FF;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.quest-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 12px; height: 12px;
+  border-bottom: 2px solid #F5A623;
+  border-right: 2px solid #F5A623;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.quest-card:hover::before {
+  width: 20px; height: 20px;
+  border-color: #6BA3FF;
+  filter: drop-shadow(0 0 6px rgba(107, 163, 255, 0.5));
+}
+.quest-card:hover::after {
+  width: 20px; height: 20px;
+  border-color: #F5A623;
+  filter: drop-shadow(0 0 6px rgba(245, 166, 35, 0.5));
+}
+
+/* ── Glow text effects ── */
 .text-glow {
   text-shadow: 0 0 20px rgba(107, 163, 255, 0.5);
+}
+.text-glow-blue {
+  text-shadow: 0 0 20px rgba(107, 163, 255, 0.5), 0 0 60px rgba(107, 163, 255, 0.15);
+}
+.text-glow-warm {
+  text-shadow: 0 0 20px rgba(245, 166, 35, 0.5), 0 0 60px rgba(245, 166, 35, 0.15);
+}
+
+/* ── Premium button with glow ── */
+.btn-quest {
+  position: relative;
+  background: linear-gradient(135deg, #6BA3FF 0%, #4A7FD4 100%);
+  color: white;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(107, 163, 255, 0.25);
+  letter-spacing: 0.05em;
+}
+.btn-quest:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(107, 163, 255, 0.4);
+}
+.btn-quest:active {
+  transform: translateY(0);
+}
+
+/* ── Spinner glow ── */
+.spinner-glow {
+  filter: drop-shadow(0 0 12px rgba(107, 163, 255, 0.6));
+}
+
+/* ── Gradient border effect for pricing cards ── */
+.gradient-border-hover {
+  position: relative;
+  background: #05070A;
+  isolation: isolate;
+}
+.gradient-border-hover::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(107, 163, 255, 0.15), rgba(245, 166, 35, 0.15));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.gradient-border-hover:hover::before {
+  opacity: 1;
+}
+
+/* ── Animated pulse ring ── */
+@keyframes pulse-ring {
+  0% { opacity: 0.6; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.5); }
+}
+.pulse-ring::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(107, 163, 255, 0.4);
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+/* ── Fade-in-up animation ── */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── Rune glow keyframes ── */
+@keyframes rune-glow {
+  0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 4px rgba(107, 163, 255, 0.3)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 8px rgba(107, 163, 255, 0.7)); }
+}
+.animate-rune-glow {
+  animation: rune-glow 3s ease-in-out infinite;
 }
