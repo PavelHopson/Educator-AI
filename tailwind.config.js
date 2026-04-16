@@ -3,23 +3,26 @@ export default {
   content: [
     "./index.html",
     "./**/*.{js,ts,jsx,tsx}",
+    "!./node_modules/**",
   ],
   theme: {
     extend: {
       colors: {
         quest: {
-          bg: '#05070A',
-          surface: '#0C1117',
-          card: '#111820',
-          border: '#1C2536',
-          accent: '#6BA3FF',
-          'accent-light': '#9DC4FF',
-          text: '#F2F5F9',
-          muted: '#94A3B8',
-          dim: '#4A5568',
+          50:  '#F2F5F9',
+          100: '#C4CED8',
+          200: '#94A3B8',
+          300: '#6BA3FF',
+          400: '#6BA3FF',
+          500: '#4A7FD4',
+          600: '#3A6BB5',
+          700: '#1C2536',
+          800: '#111820',
+          900: '#0C1117',
+          950: '#05070A',
         },
         accent: '#6BA3FF',
-        success: '#22c55e',
+        success: '#4AE6A0',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
