@@ -13,7 +13,7 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyles = "px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transform active:scale-95 tracking-wide";
+  const baseStyles = "px-6 py-3 rounded-xl font-semibold transition-[background-color,border-color,box-shadow,opacity,transform] duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transform active:scale-95 tracking-wide";
 
   const variants = {
     primary: "btn-quest",

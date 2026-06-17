@@ -74,7 +74,7 @@ export const QuizView: React.FC<QuizViewProps> = ({ game, onExit }) => {
 
         <div className="space-y-3">
           {currentQuestion.options.map((option) => {
-            let className = "w-full text-left p-4 rounded-xl border transition-all duration-200 ";
+            let className = "w-full text-left p-4 rounded-xl border transition-colors duration-200 ";
             
             if (showExplanation) {
               if (option.isCorrect) className += "bg-emerald-900/30 border-emerald-500 text-emerald-100";

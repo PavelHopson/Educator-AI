@@ -99,13 +99,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart, language, set
             <div className="flex bg-quest-950/80 rounded-lg p-1 border border-quest-700/30 ml-4">
               <button
                 onClick={() => setLanguage('en')}
-                className={`px-3 py-1 rounded-md text-[10px] font-bold tracking-wider transition-all ${language === 'en' ? 'bg-quest-500/20 text-quest-300' : 'text-slate-500 hover:text-slate-300'}`}
+                className={`px-3 py-1 rounded-md text-[10px] font-bold tracking-wider transition-colors ${language === 'en' ? 'bg-quest-500/20 text-quest-300' : 'text-slate-500 hover:text-slate-300'}`}
               >
                 EN
               </button>
               <button
                 onClick={() => setLanguage('ru')}
-                className={`px-3 py-1 rounded-md text-[10px] font-bold tracking-wider transition-all ${language === 'ru' ? 'bg-quest-500/20 text-quest-300' : 'text-slate-500 hover:text-slate-300'}`}
+                className={`px-3 py-1 rounded-md text-[10px] font-bold tracking-wider transition-colors ${language === 'ru' ? 'bg-quest-500/20 text-quest-300' : 'text-slate-500 hover:text-slate-300'}`}
               >
                 RU
               </button>
@@ -175,8 +175,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart, language, set
 
           <div className="grid md:grid-cols-3 gap-8">
             {t.features.cards.map((f, i) => (
-              <div key={i} className="quest-card p-8 rounded-2xl hover:bg-quest-800/10 transition-all duration-300 group">
-                <div className="w-12 h-12 bg-quest-500/5 border border-quest-500/10 rounded-lg flex items-center justify-center mb-6 text-quest-400 group-hover:scale-110 group-hover:border-quest-500/25 transition-all">
+              <div key={i} className="quest-card p-8 rounded-2xl hover:bg-quest-800/10 transition-colors duration-300 group">
+                <div className="w-12 h-12 bg-quest-500/5 border border-quest-500/10 rounded-lg flex items-center justify-center mb-6 text-quest-400 group-hover:scale-110 group-hover:border-quest-500/25 transition-[transform,border-color]">
                    <IllustrationFeatures type={['speed', 'game', 'export'][i] as any} />
                 </div>
                 <h3 className="text-xl font-bold mb-3 tracking-wide">{f.title}</h3>

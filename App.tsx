@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { AppState, GameType, Difficulty, GameContent, Language } from './shared/lib/game/types';
 import { generateGame, getApiKey, setApiKey } from './shared/lib/ai/geminiClient';
 import { Button } from './shared/ui/Button';
@@ -83,7 +84,12 @@ const App: React.FC = () => {
       case AppState.Upload:
       case AppState.Config:
         return (
-          <div className="max-w-4xl mx-auto animate-fade-in-up">
+          <motion.div
+            className="max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: [0.22, 0.61, 0.36, 1] }}
+          >
             <div className="quest-card rounded-2xl p-8 shadow-2xl">
               <div className="mb-10 text-center">
                 <h1 className="text-4xl font-display font-extrabold text-white mb-3 text-glow-blue">
@@ -98,7 +104,7 @@ const App: React.FC = () => {
                   {t.step1}
                 </label>
                 <textarea
-                  className="w-full h-48 bg-quest-950/50 border border-quest-700/30 rounded-xl p-4 text-slate-200 focus:ring-2 focus:ring-quest-500/50 focus:border-quest-500/30 transition-all resize-none font-mono text-sm leading-relaxed placeholder:text-slate-600"
+                  className="w-full h-48 bg-quest-950/50 border border-quest-700/30 rounded-xl p-4 text-slate-200 focus:ring-2 focus:ring-quest-500/50 focus:border-quest-500/30 transition-colors resize-none font-mono text-sm leading-relaxed placeholder:text-slate-600"
                   placeholder={t.placeholder}
                   value={sourceText}
                   onChange={(e) => setSourceText(e.target.value)}
@@ -112,14 +118,14 @@ const App: React.FC = () => {
                   <div className="grid grid-cols-2 gap-3">
                     <button
                       onClick={() => setSelectedType(GameType.Quiz)}
-                      className={`quest-card p-4 rounded-xl flex flex-col items-center gap-2 transition-all group ${selectedType === GameType.Quiz ? 'bg-quest-500/15 border-quest-500/40 text-white shadow-lg shadow-quest-500/10' : 'text-slate-400 hover:bg-quest-800/30'}`}
+                      className={`quest-card p-4 rounded-xl flex flex-col items-center gap-2 transition-colors group ${selectedType === GameType.Quiz ? 'bg-quest-500/15 border-quest-500/40 text-white shadow-lg shadow-quest-500/10' : 'text-slate-400 hover:bg-quest-800/30'}`}
                     >
                       <span className="text-3xl group-hover:scale-110 transition-transform">📝</span>
                       <span className="font-semibold text-sm tracking-wide">Quiz</span>
                     </button>
                     <button
                       onClick={() => setSelectedType(GameType.EscapeRoom)}
-                      className={`quest-card p-4 rounded-xl flex flex-col items-center gap-2 transition-all group ${selectedType === GameType.EscapeRoom ? 'bg-quest-500/15 border-quest-500/40 text-white shadow-lg shadow-quest-500/10' : 'text-slate-400 hover:bg-quest-800/30'}`}
+                      className={`quest-card p-4 rounded-xl flex flex-col items-center gap-2 transition-colors group ${selectedType === GameType.EscapeRoom ? 'bg-quest-500/15 border-quest-500/40 text-white shadow-lg shadow-quest-500/10' : 'text-slate-400 hover:bg-quest-800/30'}`}
                     >
                       <span className="text-3xl group-hover:scale-110 transition-transform">🗝️</span>
                       <span className="font-semibold text-sm tracking-wide">Escape Room</span>
@@ -157,7 +163,7 @@ const App: React.FC = () => {
                 {t.btnGenerate}
               </Button>
             </div>
-          </div>
+          </motion.div>
         );
 
       case AppState.Generating:
@@ -189,7 +195,7 @@ const App: React.FC = () => {
       <header className="glass-panel border-b border-quest-700/20 backdrop-blur-xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2 cursor-pointer group" onClick={() => setAppState(AppState.Config)}>
-            <Logo size={28} className="group-hover:drop-shadow-[0_0_10px_rgba(107,163,255,0.5)] transition-all" />
+            <Logo size={28} className="group-hover:drop-shadow-[0_0_10px_rgba(107,163,255,0.5)] transition-[filter,transform]" />
             <span className="font-display font-bold text-xl tracking-tight text-glow-blue">Questify</span>
           </div>
 

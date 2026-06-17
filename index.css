@@ -1,6 +1,20 @@
 @import "tailwindcss";
 @config "./tailwind.config.js";
 
+:root {
+  --ease: cubic-bezier(.22, .61, .36, 1);
+  --ease-spring: cubic-bezier(.34, 1.4, .64, 1);
+}
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 body {
   font-family: 'Inter', system-ui, sans-serif;
   background-color: #05070A;
@@ -52,7 +66,7 @@ body {
   background: rgba(12, 17, 23, 0.85);
   border: 1px solid rgba(107, 163, 255, 0.1);
   backdrop-filter: blur(8px);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease);
 }
 .quest-card::before {
   content: '';
@@ -61,7 +75,7 @@ body {
   width: 12px; height: 12px;
   border-top: 2px solid #6BA3FF;
   border-left: 2px solid #6BA3FF;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: width .4s var(--ease), height .4s var(--ease), border-color .4s var(--ease), filter .4s var(--ease);
 }
 .quest-card::after {
   content: '';
@@ -70,7 +84,7 @@ body {
   width: 12px; height: 12px;
   border-bottom: 2px solid #F5A623;
   border-right: 2px solid #F5A623;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: width .4s var(--ease), height .4s var(--ease), border-color .4s var(--ease), filter .4s var(--ease);
 }
 .quest-card:hover::before {
   width: 20px; height: 20px;
@@ -104,16 +118,16 @@ body {
   border-radius: 12px;
   border: none;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform .2s var(--ease-spring), box-shadow .3s var(--ease), background-color .16s var(--ease);
   box-shadow: 0 4px 20px rgba(107, 163, 255, 0.25);
   letter-spacing: 0.05em;
 }
-.btn-quest:hover {
+.btn-quest:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(107, 163, 255, 0.4);
 }
-.btn-quest:active {
-  transform: translateY(0);
+.btn-quest:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
 }
 
 /* ── Spinner glow ── */

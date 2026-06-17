@@ -82,7 +82,7 @@ export const EscapeRoomView: React.FC<EscapeRoomViewProps> = ({ game, onExit }) 
                   key={idx}
                   onClick={() => handleChoice(choice.nextSceneId, choice.requiredItem)}
                   disabled={locked || false}
-                  className={`p-4 text-left rounded-lg transition-all border flex justify-between items-center group relative overflow-hidden
+                  className={`p-4 text-left rounded-lg transition-colors border flex justify-between items-center group relative overflow-hidden
                     ${locked 
                       ? 'bg-slate-800 border-slate-700 text-slate-500 cursor-not-allowed opacity-70' 
                       : 'bg-indigo-600 hover:bg-indigo-500 border-indigo-500 text-white shadow-lg'
