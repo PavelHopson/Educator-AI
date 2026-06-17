@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AppState, GameType, Difficulty, GameContent, Language } from './shared/lib/game/types';
-import { generateGame } from './shared/lib/ai/geminiClient';
+import { generateGame, getApiKey, setApiKey } from './shared/lib/ai/geminiClient';
 import { Button } from './shared/ui/Button';
 import { GamePlayer } from './widgets/GamePlayer';
 import { LandingPage } from './widgets/Landing/LandingPage';
@@ -200,15 +200,16 @@ const App: React.FC = () => {
                 <button onClick={() => setLanguage('ru')} className={`px-2 py-0.5 rounded text-[10px] font-bold tracking-wider ${language === 'ru' ? 'bg-quest-500/20 text-quest-300' : 'text-slate-500'}`}>RU</button>
              </div>
 
-             {process.env.API_KEY ? (
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-900/20 border border-emerald-500/20">
+             {/* ponytail: header key entry via prompt() — minimal; swap for a modal if it needs to be prettier */}
+             {getApiKey() ? (
+                <button onClick={setApiKey} title="Сменить API-ключ" className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-900/20 border border-emerald-500/20 hover:border-emerald-400/40 transition-colors">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_rgba(52,211,153,0.5)]"></span>
-                  <span className="text-[10px] font-medium text-emerald-400 tracking-wider uppercase">Gemini Pro</span>
-                </div>
+                  <span className="text-[10px] font-medium text-emerald-400 tracking-wider uppercase">Gemini</span>
+                </button>
              ) : (
-               <span className="text-[10px] bg-red-900/20 text-red-400 px-3 py-1.5 rounded-full border border-red-500/20 font-medium tracking-wider uppercase">
-                 API Key Missing
-               </span>
+               <button onClick={setApiKey} className="text-[10px] bg-red-900/20 text-red-400 px-3 py-1.5 rounded-full border border-red-500/20 hover:border-red-400/40 font-medium tracking-wider uppercase transition-colors">
+                 Вставить API-ключ
+               </button>
              )}
              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-quest-400 to-amber-400 p-[1px]">
                 <div className="w-full h-full rounded-full bg-quest-950 flex items-center justify-center text-[10px] font-bold tracking-wider">HEX</div>

@@ -77,6 +77,16 @@ const escapeRoomSchema: Schema = {
 };
 // #endregion
 
+// ponytail: visitor's key from localStorage, build-time env as fallback.
+// Upgrade path: a settings modal instead of the header prompt().
+export const getApiKey = (): string =>
+  ((typeof localStorage !== 'undefined' ? localStorage.getItem('educator_api_key') : null) || process.env.API_KEY || '');
+
+export const setApiKey = (): void => {
+  const k = window.prompt('Вставьте ваш Gemini API-ключ (хранится только в вашем браузере). Бесплатный ключ: https://aistudio.google.com/apikey', localStorage.getItem('educator_api_key') || '');
+  if (k !== null) { localStorage.setItem('educator_api_key', k.trim()); location.reload(); }
+};
+
 export const generateGame = async (
   text: string, 
   type: GameType, 
@@ -84,11 +94,12 @@ export const generateGame = async (
   language: Language
 ): Promise<GameContent> => {
   
-  if (!process.env.API_KEY) {
-    throw new Error("API_KEY не найден. Проверьте настройки окружения.");
+  const apiKey = getApiKey();
+  if (!apiKey) {
+    throw new Error("API-ключ не задан. Нажмите «Вставить API-ключ» в шапке и вставьте свой ключ Gemini.");
   }
 
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const ai = new GoogleGenAI({ apiKey });
   const modelName = 'gemini-2.5-flash'; 
 
   const langInstruction = language === 'ru' 
