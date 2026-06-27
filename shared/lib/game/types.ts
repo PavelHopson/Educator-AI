@@ -68,3 +68,35 @@ export interface GenerationConfig {
   difficulty: Difficulty;
   language: string;
 }
+
+// #region Educator tools (Языковой репетитор + Генератор курсов)
+export type Tool = 'games' | 'tutor' | 'course';
+
+export interface TutorMessage {
+  role: 'user' | 'model';
+  text: string;
+}
+
+// Сценарии репетитора = 6 курированных промптов (Eclipse Library).
+export type TutorScenario =
+  | 'conversation' | 'lesson' | 'flashcards' | 'errors' | 'exam' | 'immersion' | 'free';
+
+export interface CourseLesson {
+  heading: string;
+  content: string;
+  example?: string;
+}
+
+export interface CourseModule {
+  title: string;
+  lessons: CourseLesson[];
+  quiz?: { question: string; answer: string }[];
+}
+
+export interface CourseContent {
+  title: string;
+  summary: string;
+  level: string;
+  modules: CourseModule[];
+}
+// #endregion
