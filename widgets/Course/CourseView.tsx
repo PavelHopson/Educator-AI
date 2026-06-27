@@ -5,6 +5,18 @@ import { CourseContent, Language } from '../../shared/lib/game/types';
 
 const LEVELS = ['Новичок', 'Средний', 'Продвинутый'];
 
+interface SavedCourse { ts: number; course: CourseContent }
+const HISTORY_KEY = 'educator_courses';
+
+function loadHistory(): SavedCourse[] {
+  try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); } catch { return []; }
+}
+function saveToHistory(course: CourseContent): void {
+  const list = loadHistory().filter((x) => x.course.title !== course.title);
+  list.unshift({ ts: Date.now(), course });
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(list.slice(0, 5)));
+}
+
 function courseToMarkdown(c: CourseContent): string {
   let md = `# ${c.title}\n\n_Уровень: ${c.level}_\n\n${c.summary}\n\n`;
   c.modules.forEach((m, i) => {
@@ -33,13 +45,14 @@ const QuizItem: React.FC<{ q: { question: string; answer: string } }> = ({ q }) 
   );
 };
 
-export const CourseView: React.FC<{ language: Language }> = ({ language }) => {
+export const CourseView: React.FC<{ language: Language; onMakeQuiz?: (text: string) => void }> = ({ language, onMakeQuiz }) => {
   const [topic, setTopic] = useState('');
   const [level, setLevel] = useState('Новичок');
   const [course, setCourse] = useState<CourseContent | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [history, setHistory] = useState<SavedCourse[]>(loadHistory());
 
   const exportCopy = () => {
     if (!course) return;
@@ -65,7 +78,10 @@ export const CourseView: React.FC<{ language: Language }> = ({ language }) => {
     setLoading(true);
     setCourse(null);
     try {
-      setCourse(await generateCourse(topic.trim(), level, language));
+      const c = await generateCourse(topic.trim(), level, language);
+      setCourse(c);
+      saveToHistory(c);
+      setHistory(loadHistory());
     } catch (e: any) {
       setError(e.message || 'Ошибка');
     } finally {
@@ -75,6 +91,18 @@ export const CourseView: React.FC<{ language: Language }> = ({ language }) => {
 
   return (
     <div className="max-w-4xl mx-auto">
+      {history.length > 0 && !course && (
+        <div className="quest-card rounded-2xl p-4 mb-4">
+          <div className="text-[10px] font-bold text-quest-300 mb-2 uppercase tracking-[0.2em]">Недавние курсы</div>
+          <div className="flex flex-wrap gap-2">
+            {history.map((h, i) => (
+              <button key={i} onClick={() => setCourse(h.course)} className="px-3 py-1.5 rounded-lg text-sm border border-quest-700/30 text-slate-300 hover:bg-quest-800/30 transition-colors">
+                {h.course.title}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
       <div className="quest-card rounded-2xl p-6 md:p-8 shadow-2xl mb-6">
         <div className="mb-6 text-center">
           <h1 className="text-3xl font-display font-extrabold text-white mb-2 text-glow-blue">📚 Генератор курсов</h1>
@@ -121,6 +149,11 @@ export const CourseView: React.FC<{ language: Language }> = ({ language }) => {
               <button onClick={exportDownload} className="px-3 py-1.5 rounded-lg text-sm border border-quest-700/30 text-slate-300 hover:bg-quest-800/30 transition-colors">
                 ⬇️ Скачать .md
               </button>
+              {onMakeQuiz && (
+                <button onClick={() => onMakeQuiz(courseToMarkdown(course))} className="px-3 py-1.5 rounded-lg text-sm border border-quest-500/40 bg-quest-500/15 text-quest-100 hover:bg-quest-500/25 transition-colors">
+                  🎯 Квиз по курсу
+                </button>
+              )}
             </div>
           </div>
 

@@ -77,6 +77,26 @@ const App: React.FC = () => {
     }
   };
 
+  // Сгенерировать игру из произвольного текста (напр. «квиз по курсу»).
+  const generateFrom = async (text: string, type: GameType) => {
+    setTool('games');
+    setSourceText(text);
+    setSelectedType(type);
+    setError(null);
+    setIsLoading(true);
+    setAppState(AppState.Generating);
+    try {
+      const game = await generateGame(text, type, difficulty, language);
+      setGeneratedGame(game);
+      setAppState(AppState.Playing);
+    } catch (e: any) {
+      setError(e.message || 'Error');
+      setAppState(AppState.Config);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // Show Landing Page first
   if (showLanding) {
     return <LandingPage onStart={() => setShowLanding(false)} language={language} setLanguage={setLanguage} />;
@@ -242,7 +262,7 @@ const App: React.FC = () => {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-12">
-        {tool === 'tutor' ? <TutorView language={language} /> : tool === 'course' ? <CourseView language={language} /> : renderContent()}
+        {tool === 'tutor' ? <TutorView language={language} /> : tool === 'course' ? <CourseView language={language} onMakeQuiz={(text) => generateFrom(text, GameType.Quiz)} /> : renderContent()}
       </main>
     </div>
   );
