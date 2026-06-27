@@ -5,6 +5,23 @@ import { CourseContent, Language } from '../../shared/lib/game/types';
 
 const LEVELS = ['Новичок', 'Средний', 'Продвинутый'];
 
+function courseToMarkdown(c: CourseContent): string {
+  let md = `# ${c.title}\n\n_Уровень: ${c.level}_\n\n${c.summary}\n\n`;
+  c.modules.forEach((m, i) => {
+    md += `## ${i + 1}. ${m.title}\n\n`;
+    m.lessons.forEach((l) => {
+      md += `### ${l.heading}\n\n${l.content}\n\n`;
+      if (l.example) md += '```\n' + l.example + '\n```\n\n';
+    });
+    if (m.quiz && m.quiz.length) {
+      md += `**Проверь себя:**\n\n`;
+      m.quiz.forEach((q) => { md += `- ${q.question}\n  - _Ответ:_ ${q.answer}\n`; });
+      md += '\n';
+    }
+  });
+  return md;
+}
+
 const QuizItem: React.FC<{ q: { question: string; answer: string } }> = ({ q }) => {
   const [open, setOpen] = useState(false);
   return (
@@ -22,6 +39,25 @@ export const CourseView: React.FC<{ language: Language }> = ({ language }) => {
   const [course, setCourse] = useState<CourseContent | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const exportCopy = () => {
+    if (!course) return;
+    navigator.clipboard?.writeText(courseToMarkdown(course))
+      .then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); })
+      .catch(() => {});
+  };
+
+  const exportDownload = () => {
+    if (!course) return;
+    const blob = new Blob([courseToMarkdown(course)], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${course.title.slice(0, 60).replace(/[\\/:*?"<>|]+/g, '').trim() || 'course'}.md`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   const run = async () => {
     if (topic.trim().length < 3) { setError('Введите тему курса'); return; }
@@ -78,6 +114,14 @@ export const CourseView: React.FC<{ language: Language }> = ({ language }) => {
             <h2 className="text-2xl font-display font-bold text-white text-glow-blue">{course.title}</h2>
             <div className="text-xs text-quest-300 uppercase tracking-wider mt-1">Уровень: {course.level}</div>
             <p className="text-slate-300 mt-3 leading-relaxed">{course.summary}</p>
+            <div className="flex flex-wrap gap-2 mt-4">
+              <button onClick={exportCopy} className="px-3 py-1.5 rounded-lg text-sm border border-quest-700/30 text-slate-300 hover:bg-quest-800/30 transition-colors">
+                {copied ? '✓ Скопировано' : '📋 Скопировать (.md)'}
+              </button>
+              <button onClick={exportDownload} className="px-3 py-1.5 rounded-lg text-sm border border-quest-700/30 text-slate-300 hover:bg-quest-800/30 transition-colors">
+                ⬇️ Скачать .md
+              </button>
+            </div>
           </div>
 
           {course.modules.map((mod, mi) => (

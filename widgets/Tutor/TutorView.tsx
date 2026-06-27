@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Button } from '../../shared/ui/Button';
 import { tutorReply } from '../../shared/lib/ai/educatorTools';
 import { Language, TutorMessage, TutorScenario } from '../../shared/lib/game/types';
+import { listenOnce, speak, sttSupported, toBcp47, ttsSupported } from '../../shared/lib/speech';
 
 const SCENARIOS: { key: TutorScenario; label: string; icon: string; hint: string }[] = [
   { key: 'conversation', label: 'Разговор', icon: '💬', hint: 'Живой диалог с «носителем» + мягкие правки' },
@@ -23,7 +24,21 @@ export const TutorView: React.FC<{ language: Language }> = ({ language }) => {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [listening, setListening] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const stopMicRef = useRef<(() => void) | null>(null);
+
+  const toggleMic = () => {
+    if (listening) { stopMicRef.current?.(); setListening(false); return; }
+    if (!sttSupported()) { setError('Голосовой ввод не поддерживается в этом браузере (нужен Chrome/Edge).'); return; }
+    setError(null);
+    setListening(true);
+    stopMicRef.current = listenOnce(
+      toBcp47(targetLanguage),
+      (text) => setInput((p) => (p ? p + ' ' : '') + text),
+      () => setListening(false),
+    );
+  };
 
   const send = async () => {
     const text = input.trim();
@@ -89,7 +104,12 @@ export const TutorView: React.FC<{ language: Language }> = ({ language }) => {
             </button>
           ))}
         </div>
-        {activeHint && <p className="text-xs text-quest-300 mb-4">{activeHint}</p>}
+        <div className="flex items-center justify-between gap-2 mb-4 min-h-[18px]">
+          {activeHint && <p className="text-xs text-quest-300">{activeHint}</p>}
+          {messages.length > 0 && (
+            <button onClick={() => { setMessages([]); setError(null); }} className="text-xs text-slate-500 hover:text-red-300 shrink-0">Очистить</button>
+          )}
+        </div>
 
         {/* Диалог */}
         <div ref={scrollRef} className="h-[42vh] overflow-y-auto bg-quest-950/40 border border-quest-700/20 rounded-xl p-4 mb-4 space-y-3">
@@ -102,6 +122,9 @@ export const TutorView: React.FC<{ language: Language }> = ({ language }) => {
             <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
               <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm whitespace-pre-wrap leading-relaxed ${m.role === 'user' ? 'bg-quest-500/20 text-white border border-quest-500/30' : 'bg-quest-800/40 text-slate-200 border border-quest-700/30'}`}>
                 {m.text}
+                {m.role === 'model' && ttsSupported() && (
+                  <button onClick={() => speak(m.text, toBcp47(targetLanguage))} title="Прослушать произношение" className="ml-2 align-middle text-quest-300 hover:text-quest-100">🔊</button>
+                )}
               </div>
             </div>
           ))}
@@ -118,6 +141,13 @@ export const TutorView: React.FC<{ language: Language }> = ({ language }) => {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) send(); }}
           />
+          <button
+            onClick={toggleMic}
+            title="Голосовой ввод"
+            className={`px-3 py-3 rounded-xl border transition-colors ${listening ? 'bg-red-500/20 border-red-500/40 text-red-300 animate-pulse' : 'border-quest-700/30 text-slate-400 hover:bg-quest-800/30'}`}
+          >
+            🎤
+          </button>
           <Button onClick={send} isLoading={loading} className="px-6 py-3">Отправить</Button>
         </div>
       </div>
