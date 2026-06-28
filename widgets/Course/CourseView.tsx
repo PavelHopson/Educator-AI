@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Button } from '../../shared/ui/Button';
 import { generateCourse } from '../../shared/lib/ai/educatorTools';
 import { CourseContent, Language } from '../../shared/lib/game/types';
+import { CourseCatalog } from './CourseCatalog';
+import { CatalogCourse } from '../../shared/lib/data/courseCatalog';
 
 const LEVELS = ['Новичок', 'Средний', 'Продвинутый'];
 
@@ -72,13 +74,16 @@ export const CourseView: React.FC<{ language: Language; onMakeQuiz?: (text: stri
     URL.revokeObjectURL(url);
   };
 
-  const run = async () => {
-    if (topic.trim().length < 3) { setError('Введите тему курса'); return; }
+  // Ядро генерации — переиспользуется ручным вводом и выбором из каталога.
+  const generate = async (topicVal: string, levelVal: string) => {
+    if (topicVal.trim().length < 3) { setError('Введите тему курса'); return; }
+    setTopic(topicVal);
+    setLevel(levelVal);
     setError(null);
     setLoading(true);
     setCourse(null);
     try {
-      const c = await generateCourse(topic.trim(), level, language);
+      const c = await generateCourse(topicVal.trim(), levelVal, language);
       setCourse(c);
       saveToHistory(c);
       setHistory(loadHistory());
@@ -88,6 +93,9 @@ export const CourseView: React.FC<{ language: Language; onMakeQuiz?: (text: stri
       setLoading(false);
     }
   };
+
+  const run = () => generate(topic, level);
+  const pickFromCatalog = (c: CatalogCourse) => generate(c.title, c.level);
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -103,10 +111,11 @@ export const CourseView: React.FC<{ language: Language; onMakeQuiz?: (text: stri
           </div>
         </div>
       )}
+      {!course && !loading && <CourseCatalog onPick={pickFromCatalog} />}
       <div className="quest-card rounded-2xl p-6 md:p-8 shadow-2xl mb-6">
         <div className="mb-6 text-center">
           <h1 className="text-3xl font-display font-extrabold text-white mb-2 text-glow-blue">📚 Генератор курсов</h1>
-          <p className="text-quest-200">Тема → готовая учебная программа: модули, уроки, примеры, квизы.</p>
+          <p className="text-quest-200">Выберите тему из каталога или впишите свою — ИИ соберёт модули, уроки, примеры и квизы.</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-4 mb-4">
