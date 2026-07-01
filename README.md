@@ -36,6 +36,18 @@
 
 ---
 
+## Product radar
+
+Источник: [Eclipse Library · July 2026 project integration](https://library.eclipse-forge.ru/#guide/july-2026-project-integration).
+
+| Reference | Как использовать |
+|-----------|------------------|
+| **Large Language Model Course** | База для трека "LLM Engineer": fundamentals, embeddings, fine-tuning, quantization, evals, deployment и упаковка AI-сервисов |
+
+Потенциальная фича: генератор учебного пути из LLM Course → модули → квизы → escape-room задания → итоговый проект.
+
+---
+
 ## Tech Stack
 
 - **Core:** React 19, TypeScript 5.8
