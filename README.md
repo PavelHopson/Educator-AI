@@ -43,8 +43,11 @@
 | Reference | Как использовать |
 |-----------|------------------|
 | **Large Language Model Course** | База для трека "LLM Engineer": fundamentals, embeddings, fine-tuning, quantization, evals, deployment и упаковка AI-сервисов |
+| **Claude Science beta** | Reference для проверяемых исследовательских проектов: источник → анализ → график → отчёт → ревью цитат/расчётов |
+| **PPT Master** | Генерация учебных слайдов из PDF/конспекта/курса в editable PPTX со speaker notes, а не в картинки-слайды |
 
 Потенциальная фича: генератор учебного пути из LLM Course → модули → квизы → escape-room задания → итоговый проект.
+Вторая линия: исследовательский курс → reproducible notebook/report → editable presentation.
 
 ---
 
