@@ -43,6 +43,9 @@
 | Reference | Как использовать |
 |-----------|------------------|
 | **Large Language Model Course** | База для трека "LLM Engineer": fundamentals, embeddings, fine-tuning, quantization, evals, deployment и упаковка AI-сервисов |
+| **production-agentic-rag-course** | Практический трек “Research Agent”: arXiv/PDF → RAG → cited answer → Telegram bot / web workflow |
+| **ShipThatCode** | Reference для курсов “собери систему”: Redis, Git, БД, game engine как практические квесты вместо сухой теории |
+| **Voicetypr / Sokuji** | Лекции и созвоны → transcript → summary → quiz/escape room. Live translation — только с явным consent |
 | **Claude Science beta** | Reference для проверяемых исследовательских проектов: источник → анализ → график → отчёт → ревью цитат/расчётов |
 | **PPT Master** | Генерация учебных слайдов из PDF/конспекта/курса в editable PPTX со speaker notes, а не в картинки-слайды |
 
