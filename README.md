@@ -33,6 +33,7 @@
 | **PDF Upload** | Загрузка учебных материалов напрямую |
 | **EN/RU Localization** | Полная поддержка английского и русского языков |
 | **Dark UI** | Премиальный интерфейс с glassmorphism и анимациями |
+| **GitHub Onboarding** | Интерактивная практика GitHub Flow без установки и API-ключа: repository → branch → commit → pull request → merge. Прогресс сохраняется локально в браузере |
 
 ---
 
@@ -43,6 +44,7 @@
 | Reference | Как использовать |
 |-----------|------------------|
 | **Large Language Model Course** | База для трека "LLM Engineer": fundamentals, embeddings, fine-tuning, quantization, evals, deployment и упаковка AI-сервисов |
+| **Language Model Builder** | Reference для будущего provider-neutral трека tokenizer → pretraining → SFT → preference optimization. Закрытое macOS-приложение не копировать и не встраивать; собственный урок строить на публичном dataset с понятной лицензией |
 | **production-agentic-rag-course** | Практический трек “Research Agent”: arXiv/PDF → RAG → cited answer → Telegram bot / web workflow |
 | **ShipThatCode** | Reference для курсов “собери систему”: Redis, Git, БД, game engine как практические квесты вместо сухой теории |
 | **Voicetypr / Sokuji** | Лекции и созвоны → transcript → summary → quiz/escape room. Live translation — только с явным consent |

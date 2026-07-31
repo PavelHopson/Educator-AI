@@ -4,6 +4,7 @@ import { generateCourse } from '../../shared/lib/ai/educatorTools';
 import { CourseContent, Language } from '../../shared/lib/game/types';
 import { CourseCatalog } from './CourseCatalog';
 import { CatalogCourse } from '../../shared/lib/data/courseCatalog';
+import { GitHubOnboarding } from './GitHubOnboarding';
 
 const LEVELS = ['Новичок', 'Средний', 'Продвинутый'];
 
@@ -48,6 +49,7 @@ const QuizItem: React.FC<{ q: { question: string; answer: string } }> = ({ q }) 
 };
 
 export const CourseView: React.FC<{ language: Language; onMakeQuiz?: (text: string) => void }> = ({ language, onMakeQuiz }) => {
+  const [showGithubOnboarding, setShowGithubOnboarding] = useState(false);
   const [topic, setTopic] = useState('');
   const [level, setLevel] = useState('Новичок');
   const [course, setCourse] = useState<CourseContent | null>(null);
@@ -97,8 +99,38 @@ export const CourseView: React.FC<{ language: Language; onMakeQuiz?: (text: stri
   const run = () => generate(topic, level);
   const pickFromCatalog = (c: CatalogCourse) => generate(c.title, c.level);
 
+  if (showGithubOnboarding) {
+    return <GitHubOnboarding language={language} onExit={() => setShowGithubOnboarding(false)} />;
+  }
+
   return (
     <div className="max-w-4xl mx-auto">
+      {!course && !loading && (
+        <section className="quest-card rounded-2xl p-5 md:p-6 mb-4 overflow-hidden" aria-labelledby="github-path-title">
+          <div className="grid gap-5 md:grid-cols-[1fr_auto] md:items-center">
+            <div>
+              <div className="text-[10px] font-bold text-emerald-300 uppercase tracking-[0.2em]">
+                {language === 'ru' ? 'Рекомендуемый первый шаг' : 'Recommended first step'}
+              </div>
+              <h2 id="github-path-title" className="text-xl font-display font-bold text-white mt-2">
+                {language === 'ru' ? 'Освойте GitHub на своём учебном проекте' : 'Learn GitHub with your own practice project'}
+              </h2>
+              <p className="text-sm text-slate-300 leading-relaxed mt-2 max-w-2xl">
+                {language === 'ru'
+                  ? 'Пошаговая практика прямо в браузере: репозиторий, ветка, commit, pull request и безопасный merge. Код и API-ключ не нужны.'
+                  : 'A browser-based walkthrough of repositories, branches, commits, pull requests, and safe merges. No code or API key required.'}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowGithubOnboarding(true)}
+              className="min-h-12 px-5 rounded-xl bg-quest-500 text-white font-semibold hover:bg-quest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-quest-950 focus-visible:ring-quest-300"
+            >
+              {language === 'ru' ? 'Начать практику' : 'Start practice'}
+            </button>
+          </div>
+        </section>
+      )}
       {history.length > 0 && !course && (
         <div className="quest-card rounded-2xl p-4 mb-4">
           <div className="text-[10px] font-bold text-quest-300 mb-2 uppercase tracking-[0.2em]">Недавние курсы</div>
