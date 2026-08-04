@@ -34,6 +34,7 @@
 | **EN/RU Localization** | Полная поддержка английского и русского языков |
 | **Dark UI** | Премиальный интерфейс с glassmorphism и анимациями |
 | **GitHub Onboarding** | Интерактивная практика GitHub Flow без установки и API-ключа: repository → branch → commit → pull request → merge. Прогресс сохраняется локально в браузере |
+| **Deck → урок** | Импорт утверждённого deck.job.v1 из Eclipse AI Hub: строгая локальная проверка, preview слайдов и notes, повторный teacher approval и экспорт плана урока в Markdown |
 
 ---
 
@@ -49,7 +50,7 @@
 | **ShipThatCode** | Reference для курсов “собери систему”: Redis, Git, БД, game engine как практические квесты вместо сухой теории |
 | **Voicetypr / Sokuji** | Лекции и созвоны → transcript → summary → quiz/escape room. Live translation — только с явным consent |
 | **Claude Science beta** | Reference для проверяемых исследовательских проектов: источник → анализ → график → отчёт → ревью цитат/расчётов |
-| **PPT Master** | Генерация учебных слайдов из PDF/конспекта/курса в editable PPTX со speaker notes, а не в картинки-слайды |
+| **PPT Master** | MIT reference для renderer: собственный DeckJob import уже работает; editable PPTX остаётся отдельным этапом и не заявлен как готовый |
 
 Потенциальная фича: генератор учебного пути из LLM Course → модули → квизы → escape-room задания → итоговый проект.
 Вторая линия: исследовательский курс → reproducible notebook/report → editable presentation.

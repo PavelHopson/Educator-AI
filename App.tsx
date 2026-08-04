@@ -8,6 +8,7 @@ import { LandingPage } from './widgets/Landing/LandingPage';
 import { Logo } from './shared/ui/Branding';
 import { TutorView } from './widgets/Tutor/TutorView';
 import { CourseView } from './widgets/Course/CourseView';
+import { DeckImportView } from './widgets/Course/DeckImportView';
 
 const TEXTS = {
   en: {
@@ -224,7 +225,7 @@ const App: React.FC = () => {
 
           {/* Tool switcher: Игры / Репетитор / Курсы */}
           <div className="flex bg-quest-950/80 rounded-lg p-1 border border-quest-700/30 gap-0.5">
-            {([['games', '🎮', 'Игры'], ['tutor', '🗣️', 'Репетитор'], ['course', '📚', 'Курсы']] as [Tool, string, string][]).map(([k, icon, label]) => (
+            {([['games', '🎮', 'Игры'], ['tutor', '🗣️', 'Репетитор'], ['course', '📚', 'Курсы'], ['deck', '▤', 'Слайды']] as [Tool, string, string][]).map(([k, icon, label]) => (
               <button
                 key={k}
                 onClick={() => setTool(k)}
@@ -262,7 +263,13 @@ const App: React.FC = () => {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-12">
-        {tool === 'tutor' ? <TutorView language={language} /> : tool === 'course' ? <CourseView language={language} onMakeQuiz={(text) => generateFrom(text, GameType.Quiz)} /> : renderContent()}
+        {tool === 'tutor'
+          ? <TutorView language={language} />
+          : tool === 'course'
+            ? <CourseView language={language} onMakeQuiz={(text) => generateFrom(text, GameType.Quiz)} />
+            : tool === 'deck'
+              ? <DeckImportView onExit={() => setTool('course')} />
+              : renderContent()}
       </main>
     </div>
   );
