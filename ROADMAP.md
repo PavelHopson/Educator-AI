@@ -3,6 +3,7 @@
 ## Current release slice
 
 - [x] Teach the GitHub flow interactively without credentials or external mutations.
+- [x] Add a local-first AI app-building track with a specification step, QA gate, RU/EN copy and deterministic progress.
 - [x] Import an approved Eclipse deck.job.v1 as a local lesson outline.
 - [x] Enforce a 128 KB file limit, exact object fields, HTTPS-only sources, bounded slides and text,
       fail-closed policy flags and unique slide identifiers.
@@ -21,3 +22,7 @@
 
 - 2026-08-04: added the first DeckJob consumer for local, schema-bounded lesson import and
   teacher-reviewed Markdown export.
+
+- 2026-08-17: added the three-stage AI for App Building learning track. Progress stays local,
+  no provider credential is required, and the final stage makes prototype, QA, privacy, accessibility,
+  and production-readiness boundaries explicit. Added deterministic progress tests.

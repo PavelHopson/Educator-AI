@@ -126,3 +126,13 @@ npm run dev
 ## License
 
 [MIT](LICENSE) &copy; 2025 PavelHopson
+
+## AI for App Building learning track
+
+The Course screen includes a three-stage, roughly two-hour path inspired by the official
+Google AI for App Building course: understand AI limits, write a testable brief, then build
+and QA a small prototype. The implementation is original and does not copy Coursera lessons.
+
+Progress is versioned and stored only in localStorage. The track never asks for an API key,
+private repository, or customer data. It explicitly treats AI Studio output as a prototype
+until review, tests, mobile/accessibility checks, and a security pass are complete.
