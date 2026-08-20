@@ -5,7 +5,8 @@ import { CourseContent, Language } from '../../shared/lib/game/types';
 import { CourseCatalog } from './CourseCatalog';
 import { CatalogCourse } from '../../shared/lib/data/courseCatalog';
 import { GitHubOnboarding } from './GitHubOnboarding';
-import { ProductionTrack } from './ProductionTrack';
+
+const ProductionTrack = React.lazy(() => import('./ProductionTrack').then((module) => ({ default: module.ProductionTrack })));
 
 const LEVELS = ['Новичок', 'Средний', 'Продвинутый'];
 
@@ -105,7 +106,11 @@ export const CourseView: React.FC<{ language: Language; onMakeQuiz?: (text: stri
     return <GitHubOnboarding language={language} onExit={() => setShowGithubOnboarding(false)} />;
   }
   if (showAppBuildingTrack) {
-    return <ProductionTrack language={language} onExit={() => setShowAppBuildingTrack(false)} />;
+    return (
+      <React.Suspense fallback={<div role="status" className="py-16 text-center text-sm text-slate-300">Загружаем production track…</div>}>
+        <ProductionTrack language={language} onExit={() => setShowAppBuildingTrack(false)} />
+      </React.Suspense>
+    );
   }
 
   return (

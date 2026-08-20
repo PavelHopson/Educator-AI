@@ -23,6 +23,10 @@
 
 - 2026-08-20: replaced the featured app-building path with a five-stage production track. Completion
   now requires local evidence for each stage; safe-skills boundaries and manual release approval are explicit.
+- 2026-08-20: lazy-loaded CourseView and the production track at separate interaction boundaries. The
+  entry bundle fell from 686.87 KB / 181.26 KB gzip to 645.92 KB / 170.62 KB gzip; CourseView is
+  35.98 KB and ProductionTrack 6.94 KB. Real Edge/Playwright acceptance passes at 1440x900 and 390x844,
+  including evidence gating, keyboard focus, reduced motion, mobile overflow and console/network checks.
 
 - 2026-08-04: added the first DeckJob consumer for local, schema-bounded lesson import and
   teacher-reviewed Markdown export.

@@ -7,8 +7,9 @@ import { GamePlayer } from './widgets/GamePlayer';
 import { LandingPage } from './widgets/Landing/LandingPage';
 import { Logo } from './shared/ui/Branding';
 import { TutorView } from './widgets/Tutor/TutorView';
-import { CourseView } from './widgets/Course/CourseView';
 import { DeckImportView } from './widgets/Course/DeckImportView';
+
+const CourseView = React.lazy(() => import('./widgets/Course/CourseView').then((module) => ({ default: module.CourseView })));
 
 const TEXTS = {
   en: {
@@ -229,14 +230,15 @@ const App: React.FC = () => {
               <button
                 key={k}
                 onClick={() => setTool(k)}
-                className={`px-2.5 py-1 rounded text-[11px] font-bold tracking-wide transition-colors ${tool === k ? 'bg-quest-500/20 text-quest-200' : 'text-slate-500 hover:text-slate-300'}`}
+                aria-label={label}
+                className={`ef-keyboard-focus px-2.5 py-1 rounded text-[11px] font-bold tracking-wide transition-colors ${tool === k ? 'bg-quest-500/20 text-quest-200' : 'text-slate-500 hover:text-slate-300'}`}
               >
                 {icon}<span className="hidden sm:inline"> {label}</span>
               </button>
             ))}
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
              {/* Language Switcher Mini */}
              <div className="hidden sm:flex bg-quest-950/80 rounded-lg p-1 border border-quest-700/30 mr-2">
                 <button onClick={() => setLanguage('en')} className={`px-2 py-0.5 rounded text-[10px] font-bold tracking-wider ${language === 'en' ? 'bg-quest-500/20 text-quest-300' : 'text-slate-500'}`}>EN</button>
@@ -254,7 +256,7 @@ const App: React.FC = () => {
                  Вставить API-ключ
                </button>
              )}
-             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-quest-400 to-amber-400 p-[1px]">
+             <div className="hidden sm:block w-8 h-8 rounded-full bg-gradient-to-br from-quest-400 to-amber-400 p-[1px]">
                 <div className="w-full h-full rounded-full bg-quest-950 flex items-center justify-center text-[10px] font-bold tracking-wider">HEX</div>
              </div>
           </div>
@@ -266,7 +268,11 @@ const App: React.FC = () => {
         {tool === 'tutor'
           ? <TutorView language={language} />
           : tool === 'course'
-            ? <CourseView language={language} onMakeQuiz={(text) => generateFrom(text, GameType.Quiz)} />
+            ? (
+              <React.Suspense fallback={<div role="status" className="py-16 text-center text-sm text-slate-300">Загружаем обучение…</div>}>
+                <CourseView language={language} onMakeQuiz={(text) => generateFrom(text, GameType.Quiz)} />
+              </React.Suspense>
+            )
             : tool === 'deck'
               ? <DeckImportView onExit={() => setTool('course')} />
               : renderContent()}
