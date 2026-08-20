@@ -5,7 +5,7 @@ import { CourseContent, Language } from '../../shared/lib/game/types';
 import { CourseCatalog } from './CourseCatalog';
 import { CatalogCourse } from '../../shared/lib/data/courseCatalog';
 import { GitHubOnboarding } from './GitHubOnboarding';
-import { AppBuildingTrack } from './AppBuildingTrack';
+import { ProductionTrack } from './ProductionTrack';
 
 const LEVELS = ['Новичок', 'Средний', 'Продвинутый'];
 
@@ -105,7 +105,7 @@ export const CourseView: React.FC<{ language: Language; onMakeQuiz?: (text: stri
     return <GitHubOnboarding language={language} onExit={() => setShowGithubOnboarding(false)} />;
   }
   if (showAppBuildingTrack) {
-    return <AppBuildingTrack language={language} onExit={() => setShowAppBuildingTrack(false)} />;
+    return <ProductionTrack language={language} onExit={() => setShowAppBuildingTrack(false)} />;
   }
 
   return (

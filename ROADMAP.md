@@ -4,6 +4,7 @@
 
 - [x] Teach the GitHub flow interactively without credentials or external mutations.
 - [x] Add a local-first AI app-building track with a specification step, QA gate, RU/EN copy and deterministic progress.
+- [x] Add the evidence-based Vibe Coding → Spec Kit → Harness Engineering → Safe Skills → Production Project track with original first-party templates.
 - [x] Import an approved Eclipse deck.job.v1 as a local lesson outline.
 - [x] Enforce a 128 KB file limit, exact object fields, HTTPS-only sources, bounded slides and text,
       fail-closed policy flags and unique slide identifiers.
@@ -19,6 +20,9 @@
       the browser bundle.
 
 ## Changelog
+
+- 2026-08-20: replaced the featured app-building path with a five-stage production track. Completion
+  now requires local evidence for each stage; safe-skills boundaries and manual release approval are explicit.
 
 - 2026-08-04: added the first DeckJob consumer for local, schema-bounded lesson import and
   teacher-reviewed Markdown export.

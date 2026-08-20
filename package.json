@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "test": "node --test shared/lib/deck/deckJob.test.mjs shared/lib/learning/appBuildingTrack.test.mjs",
+    "test": "node --test shared/lib/deck/deckJob.test.mjs shared/lib/learning/appBuildingTrack.test.mjs shared/lib/learning/productionTrack.v2.test.mjs",
     "typecheck": "tsc --noEmit",
     "build": "vite build",
     "preview": "vite preview"
