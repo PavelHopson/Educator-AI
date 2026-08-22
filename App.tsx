@@ -215,7 +215,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="grain min-h-screen bg-quest-950 text-slate-100 selection:bg-quest-500/25 selection:text-white font-sans cyber-grid">
+    <div className="grain min-h-screen bg-quest-950 text-slate-100 selection:bg-quest-500/25 selection:text-white font-sans cyber-grid educator-shell" data-visual-profile="editorial-bento">
       {/* App Header */}
       <header className="glass-panel border-b border-quest-700/20 backdrop-blur-xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">

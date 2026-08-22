@@ -34,3 +34,5 @@
 - 2026-08-17: added the three-stage AI for App Building learning track. Progress stays local,
   no provider credential is required, and the final stage makes prototype, QA, privacy, accessibility,
   and production-readiness boundaries explicit. Added deterministic progress tests.
+
+- 2026-08-22: assigned the `editorial-bento` profile with warmer reading surfaces, serif learning hierarchy and bounded module cards. Typecheck, eight learning/deck tests and production build pass; teacher approval and evidence gates are unchanged.

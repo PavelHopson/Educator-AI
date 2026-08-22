@@ -191,3 +191,21 @@ body {
 .animate-rune-glow {
   animation: rune-glow 3s ease-in-out infinite;
 }
+
+/* Visual profile: editorial learning surfaces arranged as bento. */
+.educator-shell[data-visual-profile="editorial-bento"] {
+  background:
+    radial-gradient(circle at 86% 5%, rgba(245,166,35,.08), transparent 28rem),
+    #05070a;
+}
+.educator-shell[data-visual-profile="editorial-bento"] h1,
+.educator-shell[data-visual-profile="editorial-bento"] h2 { font-family: Georgia, 'Times New Roman', serif; letter-spacing: -.025em; text-wrap: balance; }
+.educator-shell[data-visual-profile="editorial-bento"] .quest-card {
+  border-radius: 16px;
+  box-shadow: 0 24px 70px -54px rgba(107,163,255,.9);
+}
+.educator-shell[data-visual-profile="editorial-bento"] :focus-visible { outline: 3px solid #6ba3ff; outline-offset: 3px; }
+@media (prefers-reduced-motion:reduce) {
+  .educator-shell[data-visual-profile="editorial-bento"] .pulse-ring::after,
+  .educator-shell[data-visual-profile="editorial-bento"] .animate-rune-glow { animation: none !important; }
+}
