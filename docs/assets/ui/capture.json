@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "project": "Educator-AI",
+  "capturedAt": "2026-09-08T09:49:42.729Z",
+  "caption": "Главная Questify: вход в создание учебного квеста и демонстрационный сценарий.",
+  "method": "isolated-local-source-preview",
+  "context": "Local source preview, clean browser storage, reduced motion, no .env, external resources and backend APIs blocked. Repository content only, no additional fixtures or personal history; no production verification.",
+  "sourceHead": "0dbb5573f7a227c8f853ecade048dac8ecffd182",
+  "sourceWorktreeDirty": true,
+  "entryFiles": [
+    {
+      "file": "index.html",
+      "sha256": "67761ca39a8a99d765f942e35d97c32f1ff265c1dbf057145c6242411189aaad"
+    },
+    {
+      "file": "package.json",
+      "sha256": "72f3da65c7cf5ef0e5fba3e81e35b18579a2fd47a653dca334227ec15c993a3e"
+    },
+    {
+      "file": "index.tsx",
+      "sha256": "0bdc46d82f21f22babc70484c9adb640fe44f24ff23b86582eb4ab3f77305794"
+    }
+  ],
+  "screenshots": [
+    {
+      "kind": "overview",
+      "file": "overview.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "5127e319323bc8b19563b2e63d8c123d2110250c20c3f988e8dda61f75e802e3",
+      "bytes": 201308
+    },
+    {
+      "kind": "mobile",
+      "file": "mobile.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "7ec6b60c5016d88a9e63ef0774ce372e0e106e1d10170eccc3419579752bd802",
+      "bytes": 120710
+    }
+  ],
+  "review": "Desktop and selected mobile captures visually reviewed before documentation use."
+}

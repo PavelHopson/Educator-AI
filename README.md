@@ -1,20 +1,64 @@
-# Educator AI / Questify
+# Educator AI
 
-![Banner](https://img.shields.io/badge/QUESTIFY-AI_GAMIFICATION_ENGINE-6d28d9?style=for-the-badge&logo=google-gemini&logoColor=white)
+![Educator AI: Материал → Задания → Практика](docs/assets/repository-cover.svg)
 
-<div align="center">
+**Учебные сценарии.** Преобразование учебного материала в интерактивные задания, квесты и структурированные учебные сценарии.
 
-[![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react)](https://react.dev)
-[![Vite](https://img.shields.io/badge/Vite-6-646cff?style=flat-square&logo=vite)](https://vite.dev)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178c6?style=flat-square&logo=typescript)](https://www.typescriptlang.org)
-[![Gemini](https://img.shields.io/badge/Gemini_AI-Google-8e75b2?style=flat-square&logo=google-gemini)](https://ai.google.dev)
-[![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
+<!-- repository-guide:start -->
+[Интерфейс](#readme-interface) · [Первый запуск](#readme-start) · [Что внутри](#readme-map) · [Путеводитель](docs/repository-guide.md#start) · [Карта кода](docs/repository-guide.md#map) · [Проверки](docs/repository-guide.md#checks) · [Границы и права](docs/repository-guide.md#boundaries)
 
-**Превращает PDF и учебные материалы в интерактивные квесты и escape rooms за 60 секунд.**
+<a id="readme-interface"></a>
 
-</div>
+## Интерфейс
 
----
+![Educator AI — Главная Questify: вход в создание учебного квеста и демонстрационный сценарий.](docs/assets/ui/overview.png)
+
+**Главная Questify: вход в создание учебного квеста и демонстрационный сценарий.**
+
+Локальный снимок от 8 сентября 2026: отдельный профиль браузера, без внешних API и пользовательских секретов. Это вид интерфейса, не подтверждение production-функций.
+
+<details>
+<summary><strong>Мобильный экран · 390 px</strong></summary>
+
+<img src="docs/assets/ui/mobile.png" alt="Educator AI — мобильный экран" width="390">
+
+</details>
+
+[Открыть в полном размере](docs/assets/ui/overview.png) · [Данные снимка](docs/assets/ui/capture.json)
+
+<a id="readme-map"></a>
+
+## Проект за минуту
+
+- **[Квизы](<components/QuizPlayer.tsx>)** — Интерактивное прохождение учебных вопросов.
+- **[Квесты](<components/EscapeRoomPlayer.tsx>)** — Игровая подача учебного материала.
+- **[Учебные треки](<shared/lib/learning>)** — Структурированные сценарии обучения и проверки.
+
+<a id="readme-start"></a>
+
+## Начать локально
+
+**Среда:** Node.js и npm. **Источник:** [package.json](<package.json>).
+
+Из корня клонированного репозитория:
+
+```bash
+npm ci
+npm run dev
+```
+
+Интерфейс и внешние AI-вызовы — разные этапы. До подключения провайдера проверьте настройки, стоимость и обработку ключей; значения секретов в README не размещаются.
+
+<details>
+<summary><strong>Перед первым запуском и изменением кода</strong></summary>
+
+- Команды сверены с исходниками 8 сентября 2026. Это инструкция, а не отметка об успешном запуске или текущем production.
+- Установка зависимостей может обращаться в registry и выполнять lifecycle scripts. Используйте отдельную рабочую среду и демонстрационные данные.
+- Педагог проверяет содержание и ответы. Загруженные документы и данные учащихся не должны попадать в публичные примеры.
+- [ROADMAP.md](<ROADMAP.md>)
+
+</details>
+<!-- repository-guide:end -->
 
 ## About
 
