@@ -8,6 +8,7 @@ import { LandingPage } from './widgets/Landing/LandingPage';
 import { Logo } from './shared/ui/Branding';
 import { TutorView } from './widgets/Tutor/TutorView';
 import { DeckImportView } from './widgets/Course/DeckImportView';
+import { PracticumView } from './widgets/Course/PracticumView';
 
 const CourseView = React.lazy(() => import('./widgets/Course/CourseView').then((module) => ({ default: module.CourseView })));
 
@@ -43,9 +44,9 @@ Example:
 };
 
 const App: React.FC = () => {
-  const [showLanding, setShowLanding] = useState(true);
+  const [showLanding, setShowLanding] = useState(() => new URLSearchParams(window.location.search).get('workspace') !== 'practicum');
   const [language, setLanguage] = useState<Language>('ru'); // Default to Russian
-  const [tool, setTool] = useState<Tool>('games');
+  const [tool, setTool] = useState<Tool>(() => new URLSearchParams(window.location.search).get('workspace') === 'practicum' ? 'practicum' : 'games');
   const [appState, setAppState] = useState<AppState>(AppState.Upload);
   const [sourceText, setSourceText] = useState('');
   const [selectedType, setSelectedType] = useState<GameType>(GameType.Quiz);
@@ -218,7 +219,7 @@ const App: React.FC = () => {
     <div className="grain min-h-screen bg-quest-950 text-slate-100 selection:bg-quest-500/25 selection:text-white font-sans cyber-grid educator-shell" data-visual-profile="editorial-bento">
       {/* App Header */}
       <header className="glass-panel border-b border-quest-700/20 backdrop-blur-xl sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 min-h-16 py-3 flex flex-wrap gap-3 items-center justify-between">
           <div className="flex items-center gap-2 cursor-pointer group" onClick={() => { setTool('games'); setAppState(AppState.Config); }}>
             <Logo size={28} className="group-hover:drop-shadow-[0_0_10px_rgba(107,163,255,0.5)] transition-[filter,transform]" />
             <span className="font-display font-bold text-xl tracking-tight text-glow-blue">Questify</span>
@@ -226,14 +227,15 @@ const App: React.FC = () => {
 
           {/* Tool switcher: Игры / Репетитор / Курсы */}
           <div className="flex bg-quest-950/80 rounded-lg p-1 border border-quest-700/30 gap-0.5">
-            {([['games', '🎮', 'Игры'], ['tutor', '🗣️', 'Репетитор'], ['course', '📚', 'Курсы'], ['deck', '▤', 'Слайды']] as [Tool, string, string][]).map(([k, icon, label]) => (
+            {([['games', '🎮', 'Игры'], ['tutor', '🗣️', 'Репетитор'], ['course', '📚', 'Курсы'], ['deck', '▤', 'Слайды'], ['practicum', '✎', 'Практикумы']] as [Tool, string, string][]).map(([k, icon, label]) => (
               <button
                 key={k}
                 onClick={() => setTool(k)}
                 aria-label={label}
+                aria-pressed={tool === k}
                 className={`ef-keyboard-focus px-2.5 py-1 rounded text-[11px] font-bold tracking-wide transition-colors ${tool === k ? 'bg-quest-500/20 text-quest-200' : 'text-slate-500 hover:text-slate-300'}`}
               >
-                {icon}<span className="hidden sm:inline"> {label}</span>
+                {icon}<span className={k === 'practicum' ? 'inline' : 'hidden sm:inline'}> {label}</span>
               </button>
             ))}
           </div>
@@ -246,7 +248,7 @@ const App: React.FC = () => {
              </div>
 
              {/* ponytail: header key entry via prompt() — minimal; swap for a modal if it needs to be prettier */}
-             {getApiKey() ? (
+             {tool === 'practicum' ? <span className="text-xs text-quest-300">Локальная практика</span> : getApiKey() ? (
                 <button onClick={setApiKey} title="Сменить API-ключ" className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-900/20 border border-emerald-500/20 hover:border-emerald-400/40 transition-colors">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_rgba(52,211,153,0.5)]"></span>
                   <span className="text-[10px] font-medium text-emerald-400 tracking-wider uppercase">Gemini</span>
@@ -265,7 +267,8 @@ const App: React.FC = () => {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-12">
-        {tool === 'tutor'
+        <div hidden={tool !== 'practicum'}><PracticumView /></div>
+        {tool === 'practicum' ? null : tool === 'tutor'
           ? <TutorView language={language} />
           : tool === 'course'
             ? (

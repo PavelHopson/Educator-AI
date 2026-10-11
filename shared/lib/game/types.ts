@@ -70,7 +70,7 @@ export interface GenerationConfig {
 }
 
 // #region Educator tools (Языковой репетитор + Генератор курсов)
-export type Tool = 'games' | 'tutor' | 'course' | 'deck';
+export type Tool = 'games' | 'tutor' | 'course' | 'deck' | 'practicum';
 
 export interface TutorMessage {
   role: 'user' | 'model';
