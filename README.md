@@ -1,5 +1,9 @@
 # Educator AI
 
+<!-- project-links:start -->
+[Открыть веб-версию](https://educator-ai.pages.dev) · [Документация](docs/repository-guide.md) · [Код](https://github.com/PavelHopson/Educator-AI/tree/main) · [История изменений](https://github.com/PavelHopson/Educator-AI/commits/main/)
+<!-- project-links:end -->
+
 ![Educator AI: Материал → Задания → Практика](docs/assets/repository-cover.svg)
 
 **Учебные сценарии.** Преобразование учебного материала в интерактивные задания, квесты и структурированные учебные сценарии.
@@ -60,15 +64,19 @@ npm run dev
 </details>
 <!-- repository-guide:end -->
 
-## About
+<a id="about"></a>
+
+## О проекте
 
 **Questify** -- AI-платформа для геймификации обучения. Загрузите любой учебный текст, и Gemini AI мгновенно превратит его в интерактивный квиз или escape room с сюжетом, персонажами и головоломками.
 
-Проект задуман как инструмент для корпоративного обучения (L&D) и edtech: сокращает создание курса с недель до минуты.
+Проект предназначен для корпоративного обучения (L&D) и edtech: помогает подготовить задания по исходному материалу и проверить результат перед использованием.
 
 ---
 
-## Features
+<a id="features"></a>
+
+## Возможности
 
 | Фича | Описание |
 | :--- | :--- |
@@ -82,7 +90,9 @@ npm run dev
 
 ---
 
-## Product radar
+<a id="product-radar"></a>
+
+## Источники и идеи развития
 
 Источник: [Eclipse Library · July 2026 project integration](https://library.eclipse-forge.ru/#guide/july-2026-project-integration).
 
@@ -101,7 +111,9 @@ npm run dev
 
 ---
 
-## Tech Stack
+<a id="tech-stack"></a>
+
+## Технологии
 
 - **Core:** React 19, TypeScript 5.8
 - **Build:** Vite 6
@@ -111,7 +123,9 @@ npm run dev
 
 ---
 
-## Project Structure
+<a id="project-structure"></a>
+
+## Структура проекта
 
 ```
 .
@@ -132,14 +146,20 @@ npm run dev
 
 ---
 
-## Quick Start
+<a id="quick-start"></a>
 
-### Prerequisites
+## Быстрый старт
+
+<a id="prerequisites"></a>
+
+### Требования
 
 - Node.js 18+
 - Google Gemini API Key ([получить здесь](https://aistudio.google.com/))
 
-### Installation
+<a id="installation"></a>
+
+### Установка
 
 ```bash
 git clone https://github.com/PavelHopson/Educator-AI.git
@@ -147,7 +167,9 @@ cd Educator-AI
 npm install
 ```
 
-### Configuration
+<a id="configuration"></a>
+
+### Настройка
 
 Скопируйте `.env.example` и укажите свой API-ключ:
 
@@ -159,7 +181,9 @@ cp .env.example .env
 GEMINI_API_KEY=your_api_key_here
 ```
 
-### Run
+<a id="run"></a>
+
+### Запуск
 
 ```bash
 npm run dev
@@ -167,7 +191,9 @@ npm run dev
 
 ---
 
-## License
+<a id="license"></a>
+
+## Лицензия
 
 [MIT](LICENSE) &copy; 2025 PavelHopson
 
@@ -190,12 +216,14 @@ npm run dev
 Локально проверены 320 px и desktop, валидация, смена упражнения без потери ответа и экспорт.
 Предупреждение сборки о chunk больше 500 kB остаётся; реальные AI-вызовы не проверялись.
 
-## AI for App Building learning track
+<a id="ai-for-app-building-learning-track"></a>
 
-The Course screen includes a three-stage, roughly two-hour path inspired by the official
-Google AI for App Building course: understand AI limits, write a testable brief, then build
-and QA a small prototype. The implementation is original and does not copy Coursera lessons.
+## Учебный трек AI for App Building
 
-Progress is versioned and stored only in localStorage. The track never asks for an API key,
-private repository, or customer data. It explicitly treats AI Studio output as a prototype
-until review, tests, mobile/accessibility checks, and a security pass are complete.
+На экране курса есть трек из трёх этапов, вдохновлённый Google AI for App Building:
+разобраться в ограничениях AI, составить проверяемое задание, собрать и проверить
+небольшой прототип. Реализация самостоятельная, уроки Coursera не копируются.
+
+Прогресс версионируется и хранится только в localStorage. Трек не запрашивает API-ключ,
+закрытый репозиторий или данные клиентов. Результат AI Studio считается прототипом
+до ревью, тестов, проверки мобильного интерфейса, доступности и безопасности.
